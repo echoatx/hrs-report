@@ -1,0 +1,15 @@
+Race_Ethnicity,Data_Type,Data
+American Indian,Percent_HRS,0.6
+American Indian,Percent_Census,0.2
+Asian,Percent_HRS,0.6
+Asian,Percent_Census,8.1
+Black,Percent_HRS,32.5
+Black,Percent_Census,8.5
+Hispanic/Latino,Percent_HRS,28.8
+Hispanic/Latino,Percent_Census,33
+Pacific Islander,Percent_HRS,0.2
+Pacific Islander,Percent_Census,0.1
+White,Percent_HRS,25.4
+White,Percent_Census,47.9
+Two or more races,Percent_HRS,4.6
+Two or more races,Percent_Census,2.2
