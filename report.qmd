@@ -28,7 +28,8 @@ theme_echo <- function() {
   ) +
     theme(legend.position = "bottom",
           strip.background = element_rect(color = "transparent"),
-          strip.text = element_text(hjust = 0))
+          strip.text = element_text(hjust = 0),
+          axis.title.x = element_blank())
 }
 
 theme_set(theme_echo())
