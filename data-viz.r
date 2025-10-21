@@ -63,3 +63,35 @@ housing_moves |>
     x = NULL,
     fill = NULL
   )
+
+# Plot -----------------Client histogram---------------------------
+
+client_years <-
+  read_csv("data-raw/Client_Counts.csv")
+
+clients_overTime <- ggplot(client_years,
+                           aes(x = factor(Year),  
+                               y = n)) +
+  geom_col(fill = "#1c4750", width = .6) +
+  geom_text(aes(label = comma(n)),
+            color = 'black',
+            family = 'Lora',
+            vjust = -.3,
+            size = 24 / .pt) +
+  scale_y_continuous(
+    limits = c(0, 30000),
+    breaks = seq(0, 30000, by = 10000),
+    labels = comma,
+    expand = c(0, 0.)
+  ) +
+  labs(x = NULL, y = "People Served") +
+  theme_classic() +
+  theme(
+    text = element_text(family = 'Lora'),
+    legend.position = 'none',
+    panel.grid.minor.x = element_blank(),
+    axis.title = element_text(size = 24),
+    axis.text = element_text(size = 24)
+  )
+
+
