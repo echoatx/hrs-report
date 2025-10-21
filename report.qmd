@@ -106,8 +106,93 @@ housing_moves |>
   )
 ```
 
-```{r}
+```{r additional-data}
+AllClients <- client_universe$year_2019 |> 
+  mutate(Year = 2019) |>
+  bind_rows(
+    client_universe$year_2020 |>
+      mutate(Year = 2020)
+  ) |>
+  bind_rows(
+    client_universe$year_2021 |>
+      mutate(Year = 2021)
+  ) |>
+  bind_rows(
+    client_universe$year_2022 |>
+      mutate(Year = 2022)
+  ) |>
+  bind_rows(
+    client_universe$year_2023 |>
+      mutate(Year = 2023)
+  ) |>
+  bind_rows(
+    client_universe$year_2024 |>
+      mutate(Year = 2024)
+  )
 
+```
+
+```{r census-comp}
+traviscounty_race_22 <- read_csv("data/pop_race_eth_2022.csv")
+
+traviscounty_race_22 <- traviscounty_race_22 %>% 
+  mutate(Race_Ethnicity = case_when(RACE == 'American Indian and Alaska Native alone' ~ "American Indian",
+                                    RACE == 'Asian alone' ~ 'Asian',
+                                    RACE == 'Black alone' ~ 'Black',
+                                    HISP == 'Hispanic' ~ 'Hispanic/Latino',
+                                    RACE == 'Native Hawaiian and Other Pacific Islander alone' ~ 'Pacific Islander',
+                                    RACE == 'Two or more races' ~ 'Two or more races',
+                                    RACE == 'White alone' ~ 'White')) %>% 
+  rename("prop_census_22" = "prop") %>%
+  select(Race_Ethnicity, value, prop_census_22, Percent)
+
+RaceEthYears <- AllClients |> 
+  count(Year, Race_Ethnicity) |> 
+  group_by(Year) |> 
+  mutate(Prop = n / sum(n)) |> 
+  ungroup()
+
+client_raceeth_24 <- RaceEthYears |> 
+  filter(Year == 2024,
+         Race_Ethnicity != "Middle Eastern / North African" & Race_Ethnicity != "Data not collected")
+
+census_race_comp_24 <- client_raceeth_24 |> 
+  left_join(traviscounty_race_22, by = "Race_Ethnicity") |> 
+  mutate(Percent_HRS = round(Prop * 100, 1),
+         Percent_Census = round(Percent, 1)) |> 
+  select(Race_Ethnicity, Percent_HRS, Percent_Census)
+
+raceEth_census <-ggplot(census_race_comp_long_24, aes(fill = fct_rev(Data_Type), 
+                                     y = Data, 
+                                     x = fct_reorder(Race_Ethnicity, Data))) +
+  geom_bar(position = "dodge", stat = "identity") +
+  geom_text(aes(label = Data),
+            family = 'Lora', size = 20 / .pt,
+            hjust = -0.2,
+            # size = 7,
+            position = position_dodge(.9)) + 
+  labs(x = "Race or Ethnicity",
+       y = "Percent of Population") +
+  scale_fill_discrete(labels=c('2024 HMIS Enrollments', 'Travis County Population')) +
+  coord_flip() +
+  ylim(0, 60) +
+  theme(text = element_text(family = 'Lora'),
+        legend.position = 'bottom',
+        legend.text = element_text(size = 14), 
+        legend.title = element_blank(),
+        legend.key.size = unit(.25, "cm"),
+        # panel.background = element_blank(),
+        # panel.grid.major = element_line(color = "black",
+        #                                   size = 0.01),
+        plot.caption = element_text(size = 14),
+        axis.ticks = element_blank(),
+        axis.title.x = element_text(size = 18),
+        axis.text.x = element_text(size = 18),
+        # axis.ticks.length = unit(.01, "cm"),
+        axis.line.x = element_line(color="black", linewidth = .01),
+        axis.line.y = element_line(color="black", linewidth = .01))
+
+raceEth_census
 ```
 
 
