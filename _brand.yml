@@ -1,0 +1,22 @@
+meta:
+  name: brand.yml
+  link: https://posit-dev.github.io/brand-yml
+
+color:
+  palette:
+    yellow: "#ffc107"
+    blue: "#026AB5"
+
+typography:
+  fonts:
+    - family: Montserrat
+      source: google
+    - family: Georgia
+
+  base:
+    family: Georgia
+    weight: 400
+  headings:
+    family: Montserrat
+    weight: 700
+    color: blue

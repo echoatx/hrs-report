@@ -1,6 +1,11 @@
 ---
 title: "State of the HRS"
-format: typst
+format:
+  typst:
+    papersize: us-letter
+    margin:
+      x: 1in
+      y: 1in
 execute: 
   echo: false
   warning: false
@@ -36,6 +41,8 @@ theme_set(theme_echo())
 ```
 
 # Program Types Serving People with Disabilities
+
+Ullamco consectetur laboris irure incididunt consectetur dolor irure nisi eu ex adipisicing occaecat consectetur minim aliquip. Magna et id magna non qui commodo id minim. Aliquip do mollit eiusmod elit. Dolore duis consequat dolore velit fugiat anim velit Lorem incididunt nulla. Velit voluptate magna consectetur voluptate excepteur ipsum laboris culpa aute tempor culpa sit.
 
 ```{r}
 #| fig-height: 8
