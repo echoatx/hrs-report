@@ -11,6 +11,8 @@ echo_blue <- "#2373b9"
 echo_yellow <- "#f0b405"
 echo_green <- "#50dc69"
 
+echo_red <- "#ab353c"
+
 
 # Color Palettes ----------------------------------------------------------
 
