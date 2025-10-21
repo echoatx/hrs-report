@@ -195,7 +195,85 @@ raceEth_census <-ggplot(census_race_comp_long_24, aes(fill = fct_rev(Data_Type),
 raceEth_census
 ```
 
+```{r households}
 
+runHHType <- function(.data) {
+    
+  .data |>
+    mutate(Year = year(EntryDate)) |>
+    group_by(HouseholdID)|>
+    distinct(HouseholdID, .keep_all = TRUE)|>
+    ungroup() |>
+    group_by(HHType)|>
+    summarise(count = n(),
+              Year = unique(Year))|>
+    ungroup()|>
+    mutate(prop = count / sum(count)) |>
+    arrange(prop)|>
+    mutate(total = sum(count))
+}
+
+HHYears <- yearlyInflow$year2019$data$inflow |>
+  runHHType() |>
+  bind_rows(
+    yearlyInflow$year2020$data$inflow |>
+      runHHType() |>
+      bind_rows(
+        yearlyInflow$year2021$data$inflow |>
+          runHHType()
+      ) |>
+      bind_rows(
+        yearlyInflow$year2022$data$inflow |>
+          runHHType()
+      ) |>
+      bind_rows(
+        yearlyInflow$year2023$data$inflow |>
+          runHHType()
+      ) |>
+      bind_rows(
+        yearlyInflow$year2024$data$inflow |>
+          runHHType()
+      )
+  ) |>
+  rename("Household Type" = HHType)
+
+HHPlotV3 <- ggplot(data = HHYears,
+       aes(
+         x = factor(Year),
+         y = count,
+         fill = `Household Type`)) +
+  geom_col(position = 'dodge') +
+  geom_text(aes(label = paste0(comma(count))),
+            position = position_dodge(width = .9),
+            vjust = -0.3,
+            color = 'black',
+            family = 'Lora',
+            size = 14 / .pt,
+            lineheight = 0.32) +
+  scale_y_continuous(labels = comma,
+                     limits = c(0,10000)) +
+  scale_fill_manual(values = c("#1c4750", "#ad363d", "#98942b", "#0587cc")) +
+  labs(x = NULL,
+       y = NULL, 
+       color = 'Household Type') +
+  theme_classic() +
+  theme(text = element_text(family = 'Lora'),
+        legend.position = 'bottom',
+        legend.margin = margin(1, 0, 0.5, 0),
+        # legend.title = element_blank(),
+        legend.text = element_text(size = 12),
+        legend.key.height = unit(.01, "cm"),
+        # legend.key.width = unit(.01, "cm"),
+        legend.box.spacing = margin(0.5),
+        panel.background = element_blank(),
+        plot.caption = element_text(size = 14),
+        axis.title.x = element_text(size = 24),
+        axis.text.x = element_text(size = 24),
+        axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.line.y = element_blank(),
+        axis.ticks.y = element_blank())
+```
 
 
 
