@@ -31,10 +31,12 @@ theme_echo <- function() {
     base_size = 16,
     base_family = "Lora"
   ) +
-    theme(legend.position = "bottom",
-          strip.background = element_rect(color = "transparent"),
-          strip.text = element_text(hjust = 0),
-          axis.title.x = element_blank())
+    theme(
+      legend.position = "bottom",
+      strip.background = element_rect(color = "transparent"),
+      strip.text = element_text(hjust = 0),
+      axis.title.x = element_blank()
+    )
 }
 
 theme_set(theme_echo())
@@ -47,9 +49,9 @@ Ullamco consectetur laboris irure incididunt consectetur dolor irure nisi eu ex 
 ```{r}
 #| fig-height: 8
 program_types_disabilities <-
-  read_csv("data-raw/PH_Programs_with_Disabilities.csv") 
+  read_csv("data-raw/PH_Programs_with_Disabilities.csv")
 
-program_types_disabilities |> 
+program_types_disabilities |>
   ggplot(
     aes(
       x = Year,
@@ -67,8 +69,7 @@ program_types_disabilities |>
     labels = percent_format()
   ) +
   geom_line() +
-  facet_wrap(vars(name),
-             scale = "free_x")
+  facet_wrap(vars(name), scale = "free_x")
 ```
 
 
