@@ -1,6 +1,10 @@
 ---
 title: "State of the HRS"
-format: typst
+format:
+   typst:
+      template-partials: 
+         - typst-show.typ
+         - typst-template.typ
 execute: 
   echo: false
   warning: false
@@ -8,6 +12,12 @@ execute:
 editor_options: 
   chunk_output_type: console
 ---
+
+Amet aliquip amet eiusmod enim exercitation magna minim esse deserunt veniam ullamco minim deserunt. Aute magna in adipisicing quis Lorem sit ipsum labore id commodo consequat ad. Deserunt nostrud amet esse quis. Enim consequat non aliquip qui ea ipsum incididunt esse sint aliqua proident. In excepteur ipsum elit anim ad.
+
+Amet aliquip amet eiusmod enim exercitation magna minim esse deserunt veniam ullamco minim deserunt. Aute magna in adipisicing quis Lorem sit ipsum labore id commodo consequat ad. Deserunt nostrud amet esse quis. Enim consequat non aliquip qui ea ipsum incididunt esse sint aliqua proident. In excepteur ipsum elit anim ad.
+
+Amet aliquip amet eiusmod enim exercitation magna minim esse deserunt veniam ullamco minim deserunt. Aute magna in adipisicing quis Lorem sit ipsum labore id commodo consequat ad. Deserunt nostrud amet esse quis. Enim consequat non aliquip qui ea ipsum incididunt esse sint aliqua proident. In excepteur ipsum elit anim ad.
 
 ```{r}
 library(tidyverse)
@@ -26,10 +36,12 @@ theme_echo <- function() {
     base_size = 16,
     base_family = "Lora"
   ) +
-    theme(legend.position = "bottom",
-          strip.background = element_rect(color = "transparent"),
-          strip.text = element_text(hjust = 0),
-          axis.title.x = element_blank())
+    theme(
+      legend.position = "bottom",
+      strip.background = element_rect(color = "transparent"),
+      strip.text = element_text(hjust = 0),
+      axis.title.x = element_blank()
+    )
 }
 
 theme_set(theme_echo())
@@ -40,9 +52,9 @@ theme_set(theme_echo())
 ```{r}
 #| fig-height: 8
 program_types_disabilities <-
-  read_csv("data-raw/PH_Programs_with_Disabilities.csv") 
+  read_csv("data-raw/PH_Programs_with_Disabilities.csv")
 
-program_types_disabilities |> 
+program_types_disabilities |>
   ggplot(
     aes(
       x = Year,
@@ -60,8 +72,7 @@ program_types_disabilities |>
     labels = percent_format()
   ) +
   geom_line() +
-  facet_wrap(vars(name),
-             scale = "free_x")
+  facet_wrap(vars(name), scale = "free_x")
 ```
 
 
