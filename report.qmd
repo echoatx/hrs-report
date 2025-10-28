@@ -1,5 +1,7 @@
 ---
 title: "State of the HRS"
+author: "David Keyes"
+date: "2025"
 format:
    typst:
       template-partials: 
