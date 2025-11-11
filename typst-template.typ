@@ -4,9 +4,11 @@
 
 
 #let info_box(info_box_text) = {
-  box(
+  show "Note:": strong
+
+  block(
     fill: rgb("#fdeab2"),
-    width: 50%,
+    width: 100%,
     inset: 12pt,
     [#info_box_text],
   )
