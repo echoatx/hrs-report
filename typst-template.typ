@@ -53,7 +53,13 @@
       let middle_footer = if here().page() == 1 {
         place(center + horizon, image("logo.png", width: 0.4in))
       } else {
-        text(fill: white, weight: 600, size: 14pt, style: "normal", font: title_font)[austinecho.org]
+        text(
+          fill: white,
+          weight: 600,
+          size: 14pt,
+          style: "normal",
+          font: title_font,
+        )[austinecho.org]
       }
       rect(
         width: 100%,
@@ -141,7 +147,13 @@
     let size = if level in sizes { sizes.at(level) } else { 10pt }
     let heading_color = blue
 
-    set text(size: size, fill: blue, font: title_font, style: "normal", weight: "bold")
+    set text(
+      size: size,
+      fill: blue,
+      font: title_font,
+      style: "normal",
+      weight: "bold",
+    )
 
     if level == "1" {
       // add yellow lines before/after headings
