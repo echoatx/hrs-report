@@ -1,7 +1,8 @@
 ---
 title: "State of the HRS"
 author: "David Keyes"
-date: "2025"
+date: August 2024
+date-format: "MMMM YYYY"
 format:
    typst:
       template-partials: 
@@ -14,6 +15,10 @@ execute:
 editor_options: 
   chunk_output_type: console
 ---
+
+```{=typst}
+#info_box("Note: Enrollments are not the number of unique individuals served. One person can have multiple enrollments in the same program type and/or across several program types within a calendar year.")
+```
 
 Amet aliquip amet eiusmod enim exercitation magna minim esse deserunt veniam ullamco minim deserunt. Aute magna in adipisicing quis Lorem sit ipsum labore id commodo consequat ad. Deserunt nostrud amet esse quis. Enim consequat non aliquip qui ea ipsum incididunt esse sint aliqua proident. In excepteur ipsum elit anim ad.
 
@@ -119,8 +124,8 @@ housing_moves |>
   )
 ```
 
-```{r}
-
+```{=typst}
+#info_box("Note: This is different from the number of people likely to be experiencing homelessness on a single day, estimated to be 6,317 people in July 2024. Find more data at austinecho.org/dashboard.")
 ```
 
 
