@@ -1,13 +1,23 @@
 ---
 title: "State of the HRS"
-format: typst
+author: "David Keyes"
+date: August 2024
+date-format: "MMMM YYYY"
+format:
+   typst:
+      template-partials: 
+         - typst-show.typ
+         - typst-template.typ
 execute: 
   echo: false
   warning: false
   message: false
+  fig-align: center
+  fig-width: 10
 editor_options: 
   chunk_output_type: console
 ---
+
 
 ```{r}
 library(tidyverse)
@@ -26,23 +36,60 @@ theme_echo <- function() {
     base_size = 16,
     base_family = "Lora"
   ) +
-    theme(legend.position = "bottom",
-          strip.background = element_rect(color = "transparent"),
-          strip.text = element_text(hjust = 0),
-          axis.title.x = element_blank())
+    theme(
+      legend.position = "bottom",
+      strip.background = element_rect(color = "transparent"),
+      strip.text = element_text(hjust = 0),
+      axis.title.x = element_blank()
+    )
 }
 
 theme_set(theme_echo())
 ```
+
+# Report Overview
+
+This report provides an overview of the **Homelessness Response System (HRS)**, how people use the services that are available, and what else is needed to end homelessness in Austin and Travis County. The report also provides an analysis of racial and ethnic disparities in the HRS and describes the current steps that the system is taking to reach equity in homeless services.
+
+Our goal is to make this report both comprehensive and accessible so that the Continuum of Care’s (CoC) governing body, Leadership Council, may use it for CoC planning and funding priorities, service providers may use it for strategic and operational planning, and other stakeholders and the public can use it as an overview and reference guide for our local HRS.
+
+# Key Takeaways
+
+- **The number of people seeking homelessness services for the first time has increased dramatically.**
+
+Service providers in 2023 saw a 72% increase in the number of people seeking services from our HRS for the first time compared to 2022. The total number of people our HRS served in all program types also increased substantially year to year, signaling both a rise in need and an improved street outreach system. And for the first time, a plurality of people seeking homeless services for the first time are Hispanic/Latino.
+
+- **The proportion of people served by the HRS who are chronicallyhomeless continues to be high.**
+
+Austin continues to have a high rate (30%) of people experiencing chronic homelessness. In part because the HRS does not have enough Permanent Supportive Housing (PSH) to serve those who are chronically homeless, a larger proportion of people are being served in Rapid Re-Housing (RRH) who are chronically homeless than ever before. While RRH continues to be an effective program, it is less effective at serving people who are chronically homeless and/or likely need more time and services to address health and socio- economic needs.
+
+- **More people are moving into permanent housing than ever before.**
+
+In 2023, providers helped more than 3,000 new people exit homelessness, a 50% increase from 2022. Rapid Re-Housing move-ins were up 50% from 2022, and more people than ever were housed using Diversion services, which generally provide one-time assistance to help resolve someone’s homelessness. The time it took someone to move into housing in 2023 was also substantially less than it was in 2021 and 2022 but remains high (over 300 days from Coordinated Assessment to move-in).
+
+- **Our community is set to create more than 1,200 site-based PSH units by the end of 2027.**
+
+This growth is due to the dedication of significant levels of funding from the City of Austin, Travis County, the Housing Authority of the City of Austin, and the Texas Department of Housing and Community Affairs (TDHCA), among others. Housing projects like these are only possible due to the many local agencies who take on development and operations of these sites. These units will serve the comparatively high percentage of people who are experiencing chronic homelessness.
+
+
+# System Overview
+
+- **Homeless services have expanded considerably in recent years.**
+
+The total number of projects available to unhoused people seeking services across all intervention types has grown by 56% in the last five years. The number of Rapid Re-Housing (RRH) and Permanent Supportive Housing (PSH) projects has grown 54% in that time. Federal COVID-19 response dollars helped fuel this expansion, particularly in RRH projects. While some projects have since or are preparing to sunset due to a lack of sustained funding, there are 12 additional RRH projects in our HRS that did not exist before the infusion of federal pandemic aid. Additionally, the number of Diversion projects (captured under “Other” in the chart to the right) has increased through community funding opportunities like the [Austin Street Outreach Collaborative (ASOC)](https://www.austinecho.org/blog/2024/04/10/13201/) and [WoodNext Foundation microgrants](https://www.austinecho.org/blog/2024/04/10/13201/).
+
+- **The HRS serves a diverse population with needs ranging from short-term assistance to permanent housing programs like RRH and PSH.**
+
+The number of enrollments in HRS projects is rising quickly post-pandemic, particularly among program types that are most interactive. Street Outreach (SO) projects in 2023 enrolled nearly three times the participants they did in 2019, the last full calendar year before COVID-19 restrictions. Similarly, day shelters enrolled one- third more people last year than they did five years ago - and 20 times the number of people they enrolled at the height of the pandemic.
 
 # Program Types Serving People with Disabilities
 
 ```{r}
 #| fig-height: 8
 program_types_disabilities <-
-  read_csv("data-raw/PH_Programs_with_Disabilities.csv") 
+  read_csv("data-raw/PH_Programs_with_Disabilities.csv")
 
-program_types_disabilities |> 
+program_types_disabilities |>
   ggplot(
     aes(
       x = Year,
@@ -60,8 +107,7 @@ program_types_disabilities |>
     labels = percent_format()
   ) +
   geom_line() +
-  facet_wrap(vars(name),
-             scale = "free_x")
+  facet_wrap(vars(name), scale = "free_x")
 ```
 
 
@@ -106,8 +152,8 @@ housing_moves |>
   )
 ```
 
-```{r}
-
+```{=typst}
+#info_box("Note: This is different from the number of people likely to be experiencing homelessness on a single day, estimated to be 6,317 people in July 2024. Find more data at austinecho.org/dashboard.")
 ```
 
 
