@@ -24,6 +24,8 @@ library(tidyverse)
 library(scales)
 library(austinecho)
 library(gt)
+library(sf)
+library(ggrepel)
 ```
 
 ```{r}
@@ -152,3 +154,35 @@ housing_moves |>
     table_subtitle = "Subtitle"
   )
 ```
+
+# Permanent Supportive Housing Pipeline
+
+```{r}
+travis_county <- read_sf("data/travis_county.geojson")
+
+travis_county_roads <- read_sf("data/travis_county_roads.geojson")
+
+psh_providers_sf <- read_sf("data/psh_providers_sf.geojson")
+```
+
+```{r}
+#| fig-height: 8
+ggplot() +
+  geom_sf(data = travis_county, fill = "#dce6dc") +
+  geom_sf(data = travis_county_roads, color = "#b9bab9", linewidth = 0.25) +
+  geom_sf(data = psh_providers_sf, color = "#423070", size = 1) +
+  geom_label_repel(
+    data = psh_providers_sf,
+    stat = "sf_coordinates",
+    max.overlaps = 100,
+    min.segment.length = 0,
+    color = "#423070",
+    size = 2,
+    lineheight = 0.9,
+    aes(label = name, fill = year_operational, geometry = geometry)
+  ) +
+  theme_void()
+
+```
+
+
