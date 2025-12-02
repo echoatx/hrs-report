@@ -27,25 +27,6 @@ library(gt)
 ```
 
 ```{r}
-echo_blue <- "#2373b9"
-echo_yellow <- "#f0b405"
-echo_green <- "#50dc69"
-```
-
-```{r}
-theme_echo <- function() {
-  theme_classic(
-    base_size = 16,
-    base_family = "Lora"
-  ) +
-    theme(
-      legend.position = "bottom",
-      strip.background = element_rect(color = "transparent"),
-      strip.text = element_text(hjust = 0),
-      axis.title.x = element_blank()
-    )
-}
-
 theme_set(theme_echo())
 ```
 
@@ -101,8 +82,8 @@ program_types_disabilities |>
   ) +
   scale_color_manual(
     values = c(
-      "PH Program" = echo_blue,
-      "Non-PH Program" = echo_yellow
+      "PH Program" = echo_colors("Blue"),
+      "Non-PH Program" = echo_colors("Yellow")
     )
   ) +
   scale_y_continuous(
@@ -142,9 +123,9 @@ housing_moves |>
   ) +
   scale_fill_manual(
     values = c(
-      "Minimal Housing Assistance" = echo_blue,
-      "Permanent Supportive Housing" = echo_yellow,
-      "Rapid Re-Housing" = echo_green
+      "Minimal Housing Assistance" = echo_colors("Blue"),
+      "Permanent Supportive Housing" = echo_colors("Yellow"),
+      "Rapid Re-Housing" = echo_colors("Green")
     )
   ) +
   labs(
@@ -158,8 +139,6 @@ housing_moves |>
 #info_box("Note: This is different from the number of people likely to be experiencing homelessness on a single day, estimated to be 6,317 people in July 2024. Find more data at austinecho.org/dashboard.")
 ```
 
-
-
 ```{r}
 housing_moves |>
   select(-people_formatted) |>
@@ -171,9 +150,5 @@ housing_moves |>
   echo_table(
     table_title = "Housing Moves",
     table_subtitle = "Subtitle"
-  ) |>
-  fmt_number(
-    columns = -year,
-    decimals = 0
   )
 ```
